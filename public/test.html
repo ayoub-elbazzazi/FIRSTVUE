@@ -1,0 +1,269 @@
+<!-- <html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    </head>
+    <title>
+            Exemple1
+    </title>
+    <body>
+
+<div id="app">
+  
+
+
+<table>
+    <thead>
+      <tr>
+        <th v-for="key in columns"
+          @click="sortBy(key)"
+          :class="{ active: sortKey == key }">
+          {{ key | capitalize }}
+          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="entry in filteredHeroes">
+        <td v-for="key in columns">
+          {{entry[key]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</script>
+</head>
+<body>
+
+<div id="demo">
+  <form id="search">
+    Search <input name="query" v-model="searchQuery" />
+  </form>
+  <demo-grid
+    :heroes="gridData"
+    :columns="gridColumns"
+    :filter-key="searchQuery"
+  >
+  </demo-grid>
+</div>
+<script>
+Vue.component("demo-grid", {
+        template: "#grid-template",
+        props: {
+          heroes: Array,
+          columns: Array,
+          filterKey: String
+        },
+        data: function() {
+          var sortOrders = {};
+          this.columns.forEach(function(key) {
+            sortOrders[key] = 1;
+          });
+          return {
+            sortKey: "",
+            sortOrders: sortOrders
+          };
+        },
+        computed: {
+          filteredHeroes: function() {
+            var sortKey = this.sortKey;
+            var filterKey = this.filterKey && this.filterKey.toLowerCase();
+            var order = this.sortOrders[sortKey] || 1;
+            var heroes = this.heroes;
+            if (filterKey) {
+              heroes = heroes.filter(function(row) {
+                return Object.keys(row).some(function(key) {
+                  return (
+                    String(row[key])
+                      .toLowerCase()
+                      .indexOf(filterKey) > -1
+                  );
+                });
+              });
+            }
+            if (sortKey) {
+              heroes = heroes.slice().sort(function(a, b) {
+                a = a[sortKey];
+                b = b[sortKey];
+                return (a === b ? 0 : a > b ? 1 : -1) * order;
+              });
+            }
+            return heroes;
+          }
+        },
+        filters: {
+          capitalize: function(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+          }
+        },
+        methods: {
+          sortBy: function(key) {
+            this.sortKey = key;
+            this.sortOrders[key] = this.sortOrders[key] * -1;
+          }
+        }
+      });
+    
+     var demo = new Vue({
+        el: "#app",
+        data: {
+          searchQuery: "",
+          gridColumns: ["name", "Score"],
+          gridData: [
+            { name: "A", Score: Infinity },
+            { name: "B", Score: 9000 },
+            { name: "C", Score: 7000 },
+            { name: "D", Score: 8000 }
+          ]
+        }
+      });
+    
+</script>
+
+
+
+
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <title>computed</title>
+  <body>
+    <div id="atpp">
+      <label>hour</label>
+      <input type="text" v-model="hour" />
+      <label>minute</label>
+      <input type="text" v-model="minute" />
+      <label>seconde</label>
+      <input type="text" v-model="seconde" />
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+    <script>
+      var vm = new Vue({
+        el: "#atpp",
+        data: {
+          hour: 0,
+          minute: 0,
+          seconde: 0,
+          nom: "ayoub",
+          count: 0,
+          username: "",
+          ginih: 0,
+          riyal: 0,
+        },
+
+        computed: {
+          validetusername: function() {
+            if (!this.username) {
+              return "username dont empty";
+            } else if (this.username.length > 8) return "yes ";
+          },
+          ginih: function(v) {
+            this.riyal = v / 5;
+          },
+          riyal: function(v) {
+            this.ginih = v * 5;
+
+          },
+        },
+        watch: {
+          hour: function(v) {
+            this.minute = v * 60;
+            console.log("run hour ");
+          },
+          minute: function(v) {
+            this.hour = v / 60;
+            this.seconde = v * 60;
+            console.log("run minute");
+          },
+          seconde: function(v) {
+            this.hour = v / 3600;
+            console.log("run seconde ");
+          },
+          
+        },
+      });
+    </script>
+  </body>
+</html>  -->
+<!DOCTYPE html>
+<html lang="fr">
+ 
+    <!----------------------------------------------------------------------------------
+    HEAD
+    ------------------------------------------------------------------------------------>
+     
+    <head>   
+        <meta charset="utf-8">   
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Internet Explorer Specific Metas -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- Mobile Specific Metas -->
+         
+        <!-- Les librairies CSS avec Bootstrap ET styles dans laquelle je place le code CSS du lien -->      
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/styles.css">
+ 
+        <!-- Les scripts avec Bootstrap, JQuery (comme dans le lien) ET scripts où j'insère le code JS du lien -->       
+        <script src="js/bootstrap.js"></script>
+        <script src="js/jquery.js"></script>       
+        <script src="js/scripts.js"></script>  
+    </head>
+     
+    <!----------------------------------------------------------------------------------
+    BODY
+    ------------------------------------------------------------------------------------>
+     
+    <body>
+        <!-- Header -->
+        <div class="container">
+            <header class="page-header">
+                <h1><b>Bonjour</b></h1>
+                <h2><small>Blablablablablabla</small></h2>
+            </header>
+        </div>       
+        <!-- Navigation -->
+        <nav id="navbar-main" class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Coucou</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#">Accueil</a></li>
+                        <li><a href="#about">Lien 1</a></li>
+                        <li><a href="#contact">Lien 2</a></li>
+                        <li><a href="#other">Lien 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Content -->
+        <main class="container">
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id voluptatum sequi sunt asperiores eius, qui saepe tempore aliquam debitis distinctio officia optio unde perferendis fugiat sint quia consequuntur, placeat sed!</p>
+            <p class="lead">Go down, Go down!</p>
+            <p class="lead">Go down, Go down!</p>
+            <p class="lead">Go down, Go down!</p>
+            <p class="lead">Go down, Go down!</p>
+        </main>
+        <!-- Footer -->
+        <footer id="footer" class="footer">
+            <p class="text-center"><br>Test...</p>
+        </footer>
+    </body>
+ 
+</html>
+
+
